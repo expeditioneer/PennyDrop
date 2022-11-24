@@ -1,6 +1,7 @@
 plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
+    kotlin("kapt")
 }
 
 android {
@@ -15,6 +16,10 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 
     buildTypes {
