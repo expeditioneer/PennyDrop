@@ -47,6 +47,8 @@ dependencies {
     implementation(Libraries.JetPack.coreKtx)
     implementation(Libraries.JetPack.material)
     implementation(Libraries.JetPack.constrainedLayout)
+    implementation(Libraries.JetPack.lifecycleLivedata)
+    implementation(Libraries.JetPack.lifecycleViewmodel)
     implementation(Libraries.JetPack.navigationUiKtx)
     implementation(Libraries.JetPack.navigationFragment)
 

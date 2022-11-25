@@ -9,6 +9,8 @@ object Libraries {
         val appcompat by lazy { "androidx.appcompat:appcompat:1.5.1" }
         val constrainedLayout by lazy { "androidx.constraintlayout:constraintlayout:2.1.4" }
         val coreKtx by lazy { "androidx.core:core-ktx:1.8.0" }
+        val lifecycleLivedata by lazy { "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Jetpack.lifecycle}" }
+        val lifecycleViewmodel by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Jetpack.lifecycle}" }
         val material by lazy { "com.google.android.material:material:1.7.0" }
         val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.Jetpack.navigation}" }
         val navigationUiKtx by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.Jetpack.navigation}" }
