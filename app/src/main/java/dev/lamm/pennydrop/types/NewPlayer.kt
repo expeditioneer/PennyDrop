@@ -1,6 +1,7 @@
 package dev.lamm.pennydrop.types
 
 import androidx.databinding.ObservableBoolean
+import dev.lamm.pennydrop.game.AI
 
 data class NewPlayer(
     var playerName: String = "",
@@ -9,4 +10,21 @@ data class NewPlayer(
     val canBeToggled: Boolean = true,
     var isIncluded: ObservableBoolean = ObservableBoolean(!canBeRemoved),
     var selectedAIPosition: Int = -1
-)
+) {
+    fun selectedAI() = if (!isHuman.get()) {
+        AI.basicAI.getOrNull(selectedAIPosition)
+    } else {
+        null
+    }
+
+    fun toPlayer() = Player(
+        if (this.isHuman.get()) {
+            this.playerName
+        } else {
+            (this.selectedAI()?.name ?: "AI")
+        },
+        this.isHuman.get(),
+        this.selectedAI()
+
+    )
+}
