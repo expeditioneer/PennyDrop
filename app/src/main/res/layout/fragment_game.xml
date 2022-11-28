@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="vm"
+            type="dev.lamm.pennydrop.viewmodels.GameViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:SlotNum="@{1}" />
+                app:slot="@{vm.slots[0]}" />
 
             <include
                 android:id="@+id/coinSlot2"
@@ -36,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:SlotNum="@{2}" />
+                app:slot="@{vm.slots[1]}" />
 
             <include
                 android:id="@+id/coinSlot3"
@@ -44,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:SlotNum="@{3}" />
+                app:slot="@{vm.slots[2]}" />
 
             <include
                 android:id="@+id/coinSlot4"
@@ -52,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:SlotNum="@{4}" />
+                app:slot="@{vm.slots[3]}" />
 
             <include
                 android:id="@+id/coinSlot5"
@@ -60,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:SlotNum="@{5}" />
+                app:slot="@{vm.slots[4]}" />
         </LinearLayout>
 
         <include
@@ -68,7 +75,7 @@
             layout="@layout/layout_coin_slot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:SlotNum="@{6}"
+            app:slot="@{vm.slots[5]}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutCoinSlots" />
@@ -78,7 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="Hazel"
+            android:text="@{vm.currentPlayer.playerName ?? @string/na}"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="@id/textCoinsLeft"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +97,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="7"
+            android:text='@{vm.currentPlayer.pennies + ""}'
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@id/coinSlot6"
             app:layout_constraintEnd_toEndOf="@id/textCoinsLeft"
@@ -102,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:text="coin(s) left"
+            android:text="@string/coins_left"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textCurrentPlayerCoinsLeft" />
@@ -121,9 +128,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:background="@{vm.canRoll ? @color/colorPrimary : @color/plainGray}"
                 android:drawableEnd="@drawable/mdi_dice_6_black_24dp"
+                android:drawableTint="@android:color/white"
+                android:enabled="@{vm.canRoll}"
+                android:onClick="@{() -> vm.roll()}"
                 android:padding="10dp"
-                android:text="@string/roll" />
+                android:text="@string/roll"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -137,9 +149,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:background="@{vm.canPass ? @color/colorPrimary : @color/plainGray}"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+                android:drawableTint="@android:color/white"
+                android:enabled="@{vm.canPass}"
+                android:onClick="@{() -> vm.pass()}"
                 android:padding="10dp"
-                android:text="@string/pass" />
+                android:text="@string/pass"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
         <TextView
@@ -148,7 +165,7 @@
             android:layout_height="0dp"
             android:layout_margin="16dp"
             android:scrollbars="vertical"
-            android:text="This will contain info about the game."
+            android:text="@{vm.currentTurnText}"
             app:layout_constraintBottom_toTopOf="@id/textCurrentStandingsInfo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +179,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="This will contain the game's current standings."
+            android:text="@{vm.currentStandingText}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

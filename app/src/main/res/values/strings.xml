@@ -1,4 +1,6 @@
 <resources>
+    <string name="na"/>
+
     <string name="app_name">Penny Drop</string>
     <string name="players">Players</string>
     <string name="game">Game</string>
@@ -9,4 +11,5 @@
     <string name="or">OR</string>
     <string name="pass">Pass</string>
     <string name="coin_icon">coin_icon</string>
+    <string name="coins_left">coin(s) left</string>
 </resources>
