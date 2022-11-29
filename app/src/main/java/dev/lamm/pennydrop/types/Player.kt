@@ -9,11 +9,14 @@ class Player(
 ) {
     var pennies: Int = defaultPennyCount
 
-    fun addPennies(count: Int = 1){
+    fun addPennies(count: Int = 1) {
         pennies += count
     }
 
     var isRolling: Boolean = false
+
+    fun penniesLeft(subtractPenny: Boolean = false) =
+        (pennies - (if (subtractPenny) 1 else 0)) > 0
 
     companion object {
         const val defaultPennyCount = 10
