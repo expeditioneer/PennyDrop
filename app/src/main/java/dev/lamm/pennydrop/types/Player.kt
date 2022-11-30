@@ -2,21 +2,21 @@ package dev.lamm.pennydrop.types
 
 import dev.lamm.pennydrop.game.AI
 
-class Player(
-    val playerName: String = "",
-    val isHuman: Boolean = true,
-    val selectedAI: AI? = null
+data class Player(
+    var playerName: String = "",
+    var isHuman: Boolean = true,
+    var selectedAI: AI? = null
 ) {
     var pennies: Int = defaultPennyCount
+
+    var isRolling: Boolean = false
 
     fun addPennies(count: Int = 1) {
         pennies += count
     }
 
-    var isRolling: Boolean = false
-
-    fun penniesLeft(subtractPenny: Boolean = false) =
-        (pennies - (if (subtractPenny) 1 else 0)) > 0
+    fun penniesLeft(subtractPenny: Boolean = false): Boolean =
+        (pennies - (if(subtractPenny) 1 else 0)) > 0
 
     companion object {
         const val defaultPennyCount = 10

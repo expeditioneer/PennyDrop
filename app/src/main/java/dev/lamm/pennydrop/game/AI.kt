@@ -12,9 +12,9 @@ data class AI(
     companion object {
         @JvmStatic
         val basicAI = listOf(
-            AI("Two Face") { slots -> slots.fullSlots() < 3 || (slots.fullSlots() == 3 && coinFlipIsHeads())},
+            AI("TwoFace") { slots -> slots.fullSlots() < 3 || (slots.fullSlots() == 3 && coinFlipIsHeads()) },
             AI("No Go Noah") { slots -> slots.fullSlots() == 0 },
-            AI("Bail out Beulah") { slots -> slots.fullSlots() <= 1 },
+            AI("Bail Out Beulah") { slots -> slots.fullSlots() <= 1 },
             AI("Fearful Fred") { slots -> slots.fullSlots() <= 2 },
             AI("Even Steven") { slots -> slots.fullSlots() <= 3 },
             AI("Riverboat Ron") { slots -> slots.fullSlots() <= 4 },

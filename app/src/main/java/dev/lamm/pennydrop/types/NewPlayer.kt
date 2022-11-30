@@ -25,6 +25,16 @@ data class NewPlayer(
         },
         this.isHuman.get(),
         this.selectedAI()
-
     )
+
+    override fun toString() = listOf(
+        "name" to this.playerName,
+        "isIncluded" to this.isIncluded.get(),
+        "isHuman" to this.isHuman.get(),
+        "canBeRemoved" to this.canBeRemoved,
+        "canBeToggled" to this.canBeToggled,
+        "selectedAI" to (this.selectedAI()?.name ?: "N/A")
+    ).joinToString(", ", "NewPlayer(", ")") { (property, value) ->
+        "$property=$value"
+    }
 }

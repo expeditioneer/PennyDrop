@@ -12,7 +12,6 @@ import dev.lamm.pennydrop.databinding.FragmentPickPlayersBinding
 import dev.lamm.pennydrop.viewmodels.GameViewModel
 import dev.lamm.pennydrop.viewmodels.PickPlayersViewModel
 
-
 class PickPlayersFragment : Fragment() {
 
     private val pickPlayersViewModel by activityViewModels<PickPlayersViewModel>()

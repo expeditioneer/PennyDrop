@@ -75,10 +75,10 @@
             layout="@layout/layout_coin_slot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:slot="@{vm.slots[5]}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutCoinSlots" />
+            app:layout_constraintTop_toBottomOf="@id/layoutCoinSlots"
+            app:slot="@{vm.slots[5]}" />
 
         <TextView
             android:id="@+id/textCurrentPlayerName"
@@ -156,7 +156,7 @@
                 android:onClick="@{() -> vm.pass()}"
                 android:padding="10dp"
                 android:text="@string/pass"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
         <TextView
@@ -184,6 +184,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textCurrentTurnInfo"
-            tools:text="Current scores:\n\\tHazel: 4 coins\n\tMichael: 7 coins" />
+            tools:text="Current Scores:\t\nHazel: 4 coins\n\tMichael: 7 coins" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
