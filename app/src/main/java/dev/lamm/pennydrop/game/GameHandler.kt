@@ -61,6 +61,20 @@ object GameHandler {
         canPass = false
     )
 
+    fun playAITurn(
+        players: List<Player>,
+        currentPlayer: Player,
+        slots: List<Slot>,
+        canPass: Boolean,
+    ): TurnResult? =
+        currentPlayer.selectedAI?.let { ai ->
+            if (!canPass || ai.rollAgain(slots)) {
+                roll(players, currentPlayer, slots)
+            } else {
+                pass(players, currentPlayer)
+            }
+        }
+
     private fun rollDie(sides: Int = 6) = Random.nextInt(1, sides + 1)
 
     private fun nextPlayer(

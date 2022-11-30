@@ -2,12 +2,15 @@ package dev.lamm.pennydrop.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.lamm.pennydrop.game.GameHandler
 import dev.lamm.pennydrop.game.TurnEnd
 import dev.lamm.pennydrop.game.TurnResult
 import dev.lamm.pennydrop.types.Player
 import dev.lamm.pennydrop.types.Slot
 import dev.lamm.pennydrop.types.clear
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class GameViewModel : ViewModel() {
     private var clearText = false
@@ -76,6 +79,26 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    private fun playAITurn() {
+        viewModelScope.launch {
+            delay(1000)
+            slots.value?.let { currentSlots ->
+                val currentPlayer = players.firstOrNull { it.isRolling }
+
+                if (currentPlayer != null && !currentPlayer.isHuman) {
+                    GameHandler.playAITurn(
+                        players,
+                        currentPlayer,
+                        currentSlots,
+                        canPass.value == true
+                    )?.let { result ->
+                        updateFromGameHandler(result)
+                    }
+                }
+            }
+        }
+    }
+
     private fun updateFromGameHandler(result: TurnResult) {
         if (result.currentPlayer != null) {
             currentPlayer.value?.addPennies(result.coinChangeCount ?: 0)
@@ -100,6 +123,7 @@ class GameViewModel : ViewModel() {
         if (!result.isGameOver && result.currentPlayer?.isHuman == false) {
             canRoll.value = false
             canPass.value = false
+            playAITurn()
         }
     }
 
