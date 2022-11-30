@@ -5,5 +5,6 @@ object Versions {
     object Jetpack {
         const val navigation = "2.5.3"
         const val lifecycle = "2.5.1"
+        const val room = "2.4.3"
     }
 }

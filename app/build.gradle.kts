@@ -51,6 +51,10 @@ dependencies {
     implementation(Libraries.JetPack.lifecycleViewmodel)
     implementation(Libraries.JetPack.navigationUiKtx)
     implementation(Libraries.JetPack.navigationFragment)
+    implementation(Libraries.JetPack.roomKtx)
+    implementation(Libraries.JetPack.roomRuntime)
+
+    kapt(Libraries.JetPack.roomCompiler)
 
     testImplementation(TestLibraries.junit)
 
