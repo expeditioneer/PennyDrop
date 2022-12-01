@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 )
 @TypeConverters(Converters::class)
 abstract class PennyDropDatabase : RoomDatabase() {
-    abstract fun pennyDropDAO(): PennyDropDAO
+    abstract fun pennyDropDAO(): PennyDropDao
 
     companion object {
         @Volatile
