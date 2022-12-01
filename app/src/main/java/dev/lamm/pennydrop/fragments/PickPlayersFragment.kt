@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dev.lamm.pennydrop.R
 import dev.lamm.pennydrop.databinding.FragmentPickPlayersBinding
 import dev.lamm.pennydrop.viewmodels.GameViewModel
 import dev.lamm.pennydrop.viewmodels.PickPlayersViewModel
+import kotlinx.coroutines.launch
 
 class PickPlayersFragment : Fragment() {
 
@@ -27,15 +29,17 @@ class PickPlayersFragment : Fragment() {
                 this.vm = pickPlayersViewModel
 
                 this.buttonPlayGame.setOnClickListener {
-                    gameViewModel.startGame(
-                        pickPlayersViewModel.players.value?.filter { newPlayer ->
-                            newPlayer.isIncluded.get()
-                        }?.map { newPlayer ->
-                            newPlayer.toPlayer()
-                        } ?: emptyList()
-                    )
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        gameViewModel.startGame(
+                            pickPlayersViewModel.players.value?.filter { newPlayer ->
+                                newPlayer.isIncluded.get()
+                            }?.map { newPlayer ->
+                                newPlayer.toPlayer()
+                            } ?: emptyList()
+                        )
 
-                    findNavController().navigate(R.id.gameFragment)
+                        findNavController().navigate(R.id.gameFragment)
+                    }
                 }
             }
 

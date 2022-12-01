@@ -21,10 +21,6 @@ data class Player(
     @Ignore
     var gamePlayerNumber: Int = -1
 
-    fun addPennies(count: Int = 1) {
-        pennies += count
-    }
-
     fun penniesLeft(subtractPenny: Boolean = false): Boolean =
         (pennies - (if(subtractPenny) 1 else 0)) > 0
 
