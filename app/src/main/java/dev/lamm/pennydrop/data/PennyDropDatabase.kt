@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 )
 @TypeConverters(Converters::class)
 abstract class PennyDropDatabase : RoomDatabase() {
-    abstract fun pennyDropDAO(): PennyDropDao
+    abstract fun pennyDropDao(): PennyDropDao
 
     companion object {
         @Volatile
@@ -34,7 +34,7 @@ abstract class PennyDropDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         scope.launch {
-                            instance?.pennyDropDAO()?.insertPlayers(
+                            instance?.pennyDropDao()?.insertPlayers(
                                 AI.basicAI.map(AI::toPlayer)
                             )
                         }

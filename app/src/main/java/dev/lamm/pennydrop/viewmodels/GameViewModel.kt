@@ -29,13 +29,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val canPass: LiveData<Boolean>
 
     init {
-        val database =
-            PennyDropDatabase.getDatabase(application, viewModelScope)
-
         this.repository =
             PennyDropDatabase
                 .getDatabase(application, viewModelScope)
-                .pennyDropDAO()
+                .pennyDropDao()
                 .let { dao ->
                     PennyDropRepository.getInstance(dao)
                 }

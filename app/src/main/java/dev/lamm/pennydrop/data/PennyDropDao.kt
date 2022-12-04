@@ -98,6 +98,20 @@ abstract class PennyDropDao {
         this.updateGameStatuses(gameStatuses)
     }
 
+    @Transaction
+    @Query(
+        """
+            SELECT * FROM game_statuses gs
+            WHERE gs.gameId IN (
+                SELECT gameId FROM games
+                WHERE gameState = :finishedGameState 
+            )
+        """
+    )
+    abstract fun getCompletedGameStatusesWithPlayers(
+        finishedGameState: GameState = GameState.Finished
+    ): LiveData<List<GameStatusWithPlayer>>
+
     companion object {
         @Volatile
         private var instance: PennyDropRepository? = null

@@ -14,6 +14,7 @@ object Libraries {
         val material by lazy { "com.google.android.material:material:1.7.0" }
         val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.Jetpack.navigation}" }
         val navigationUiKtx by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.Jetpack.navigation}" }
+        val recyclerview by lazy { "androidx.recyclerview:recyclerview:${Versions.Jetpack.recyclerview}" }
         val roomKtx by lazy { "androidx.room:room-ktx:${Versions.Jetpack.room}" }
         val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.Jetpack.room}" }
         val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.Jetpack.room}" }
