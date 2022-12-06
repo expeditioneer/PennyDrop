@@ -2,6 +2,7 @@ package dev.lamm.pennydrop.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
+import androidx.preference.PreferenceManager
 import dev.lamm.pennydrop.data.*
 import dev.lamm.pennydrop.game.GameHandler
 import dev.lamm.pennydrop.game.TurnEnd
@@ -15,6 +16,7 @@ import java.time.OffsetDateTime
 class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var clearText = false
 
+    private val prefs = PreferenceManager.getDefaultSharedPreferences(application)
     private val repository: PennyDropRepository
 
     val currentGame = MediatorLiveData<GameWithPlayers>()
@@ -141,7 +143,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private suspend fun playAITurn() {
-        delay(1000)
+        delay(if (prefs.getBoolean("fastAI", false)) 100 else 1000)
         val game = currentGame.value?.game
         val players = currentGame.value?.players
         val currentPlayer = currentPlayer.value
@@ -199,7 +201,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     suspend fun startGame(playersForNewGame: List<Player>) {
-        repository.startGame(playersForNewGame)
+        repository.startGame(
+            playersForNewGame,
+            prefs?.getInt("pennyCount", Player.defaultPennyCount)
+        )
     }
 
     fun roll() {

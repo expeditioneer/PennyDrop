@@ -23,7 +23,7 @@
             android:minWidth="36dp"
             android:minHeight="36dp"
             android:src="@drawable/mdi_coin_black_24dp"
-            android:tint="@{slot.lastRolled ? @color/colorPrimary : @android:color/black}"
+            android:tint="@color/coin_slot_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

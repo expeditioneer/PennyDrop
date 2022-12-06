@@ -7,5 +7,6 @@ object Versions {
         const val lifecycle = "2.5.1"
         const val recyclerview = "1.2.1"
         const val room = "2.4.3"
+        const val preferences = "1.2.0"
     }
 }
