@@ -7,8 +7,7 @@ data class Slot(
     val canBeFilled: Boolean = true,
     var isFilled: Boolean = false,
     var lastRolled: Boolean = false
-)
-{
+) {
     companion object {
         fun mapFromGame(game: Game?) =
             (1..6).map { slotNum ->

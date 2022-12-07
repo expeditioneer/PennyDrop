@@ -1,6 +1,7 @@
 object BuildPlugins {
     val androidApplication  by lazy { "com.android.application" }
     val androidLibrary by lazy { "com.android.library" }
+    val hilt by lazy { "com.google.dagger.hilt.android"}
     val kotlinAndroid by lazy { "org.jetbrains.kotlin.android" }
 }
 
@@ -9,6 +10,8 @@ object Libraries {
         val appcompat by lazy { "androidx.appcompat:appcompat:1.5.1" }
         val constrainedLayout by lazy { "androidx.constraintlayout:constraintlayout:2.1.4" }
         val coreKtx by lazy { "androidx.core:core-ktx:1.8.0" }
+        val hilt by lazy { "com.google.dagger:hilt-android:${Versions.Jetpack.hilt}" }
+        val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.Jetpack.hilt}" }
         val lifecycleLivedata by lazy { "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Jetpack.lifecycle}" }
         val lifecycleViewmodel by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Jetpack.lifecycle}" }
         val material by lazy { "com.google.android.material:material:1.7.0" }

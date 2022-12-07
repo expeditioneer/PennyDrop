@@ -1,7 +1,8 @@
 plugins {
+    kotlin("kapt")
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
-    kotlin("kapt")
+    id(BuildPlugins.hilt)
 }
 
 android {
@@ -45,6 +46,7 @@ android {
 dependencies {
     implementation(Libraries.JetPack.appcompat)
     implementation(Libraries.JetPack.coreKtx)
+    implementation(Libraries.JetPack.hilt)
     implementation(Libraries.JetPack.material)
     implementation(Libraries.JetPack.constrainedLayout)
     implementation(Libraries.JetPack.lifecycleLivedata)
@@ -56,10 +58,15 @@ dependencies {
     implementation(Libraries.JetPack.roomKtx)
     implementation(Libraries.JetPack.roomRuntime)
 
+    kapt(Libraries.JetPack.hiltCompiler)
     kapt(Libraries.JetPack.roomCompiler)
 
     testImplementation(TestLibraries.junit)
 
     androidTestImplementation(TestLibraries.AndroidXTest.junit)
     androidTestImplementation(TestLibraries.AndroidXTest.espressoCore)
+}
+
+kapt {
+    correctErrorTypes = true
 }

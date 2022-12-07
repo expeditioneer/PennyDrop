@@ -3,6 +3,7 @@ object Versions {
     const val kotlin = "1.7.21"
 
     object Jetpack {
+        const val hilt = "2.44.2"
         const val navigation = "2.5.3"
         const val lifecycle = "2.5.1"
         const val recyclerview = "1.2.1"

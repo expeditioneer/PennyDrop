@@ -3,7 +3,11 @@ package dev.lamm.pennydrop.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import androidx.preference.PreferenceManager
-import dev.lamm.pennydrop.data.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.lamm.pennydrop.data.GameState
+import dev.lamm.pennydrop.data.GameStatus
+import dev.lamm.pennydrop.data.GameWithPlayers
+import dev.lamm.pennydrop.data.PennyDropRepository
 import dev.lamm.pennydrop.game.GameHandler
 import dev.lamm.pennydrop.game.TurnEnd
 import dev.lamm.pennydrop.game.TurnResult
@@ -12,16 +16,21 @@ import dev.lamm.pennydrop.types.Slot
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.OffsetDateTime
+import javax.inject.Inject
 
-class GameViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class GameViewModel @Inject constructor(
+    application: Application,
+    private val repository: PennyDropRepository
+) : AndroidViewModel(application) {
+
+    private val currentGameStatuses: LiveData<List<GameStatus>> =
+        this.repository.getCurrentGameStatuses()
+    private val prefs = PreferenceManager.getDefaultSharedPreferences(application)
+
     private var clearText = false
 
-    private val prefs = PreferenceManager.getDefaultSharedPreferences(application)
-    private val repository: PennyDropRepository
-
     val currentGame = MediatorLiveData<GameWithPlayers>()
-
-    val currentGameStatuses: LiveData<List<GameStatus>>
     val currentPlayer: LiveData<Player>
     val currentStandingsText: LiveData<String>
 
@@ -31,16 +40,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val canPass: LiveData<Boolean>
 
     init {
-        this.repository =
-            PennyDropDatabase
-                .getDatabase(application, viewModelScope)
-                .pennyDropDao()
-                .let { dao ->
-                    PennyDropRepository.getInstance(dao)
-                }
-
-        this.currentGameStatuses = this.repository.getCurrentGameStatuses()
-
         this.currentGame.addSource(
             this.repository.getCurrentGameWithPlayers()
         ) { gameWithPlayers ->
@@ -51,22 +50,19 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             updateCurrentGame(this.currentGame.value, gameStatuses)
         }
 
-        this.currentPlayer =
-            Transformations.map(this.currentGame) { gameWithPlayers ->
-                gameWithPlayers?.players?.firstOrNull { it.isRolling }
-            }
+        this.currentPlayer = Transformations.map(this.currentGame) { gameWithPlayers ->
+            gameWithPlayers?.players?.firstOrNull { it.isRolling }
+        }
 
-        this.currentStandingsText =
-            Transformations.map(this.currentGame) { gameWithPlayers ->
-                gameWithPlayers?.players?.let { players ->
-                    this.generateCurrentStandings(players)
-                }
+        this.currentStandingsText = Transformations.map(this.currentGame) { gameWithPlayers ->
+            gameWithPlayers?.players?.let { players ->
+                this.generateCurrentStandings(players)
             }
+        }
 
-        this.slots =
-            Transformations.map(this.currentGame) { gameWithPlayers ->
-                Slot.mapFromGame(gameWithPlayers?.game)
-            }
+        this.slots = Transformations.map(this.currentGame) { gameWithPlayers ->
+            Slot.mapFromGame(gameWithPlayers?.game)
+        }
 
         this.canRoll = Transformations.map(this.currentPlayer) { player ->
             player?.isHuman == true && currentGame.value?.game?.canRoll == true
