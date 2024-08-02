@@ -45,8 +45,8 @@ android {
 dependencies {
     implementation(Libraries.JetPack.appcompat)
     implementation(Libraries.JetPack.coreKtx)
-    implementation(Libraries.JetPack.hilt)
-    implementation(Libraries.JetPack.material)
+    implementation(Libraries.Google.hilt)
+    implementation(Libraries.Google.material)
     implementation(Libraries.JetPack.constrainedLayout)
     implementation(Libraries.JetPack.lifecycleLivedata)
     implementation(Libraries.JetPack.lifecycleViewmodel)
@@ -57,7 +57,7 @@ dependencies {
     implementation(Libraries.JetPack.roomKtx)
     implementation(Libraries.JetPack.roomRuntime)
 
-    kapt(Libraries.JetPack.hiltCompiler)
+    kapt(Libraries.Google.hiltCompiler)
     kapt(Libraries.JetPack.roomCompiler)
 
     testImplementation(TestLibraries.junit)

@@ -7,21 +7,24 @@ object BuildPlugins {
 
 object Libraries {
     object JetPack {
-        val appcompat by lazy { "androidx.appcompat:appcompat:1.7.0" }
-        val constrainedLayout by lazy { "androidx.constraintlayout:constraintlayout:2.1.4" }
-        val coreKtx by lazy { "androidx.core:core-ktx:1.13.1" }
-        val hilt by lazy { "com.google.dagger:hilt-android:${Versions.Jetpack.hilt}" }
-        val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.Jetpack.hilt}" }
-        val lifecycleLivedata by lazy { "androidx.lifecycle:lifecycle-livedata:${Versions.Jetpack.lifecycle}" }
-        val lifecycleViewmodel by lazy { "androidx.lifecycle:lifecycle-viewmodel:${Versions.Jetpack.lifecycle}" }
-        val material by lazy { "com.google.android.material:material:1.7.0" }
-        val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.Jetpack.navigation}" }
-        val navigationUiKtx by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.Jetpack.navigation}" }
-        val preferenceKtx by lazy { "androidx.preference:preference-ktx:${Versions.Jetpack.preferences}" }
-        val recyclerview by lazy { "androidx.recyclerview:recyclerview:${Versions.Jetpack.recyclerview}" }
-        val roomKtx by lazy { "androidx.room:room-ktx:${Versions.Jetpack.room}" }
-        val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.Jetpack.room}" }
-        val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.Jetpack.room}" }
+        val appcompat by lazy { "androidx.appcompat:appcompat:${Versions.Jetpack.APP_COMPAT}" }
+        val constrainedLayout by lazy { "androidx.constraintlayout:constraintlayout:${Versions.Jetpack.CONSTRAINED_LAYOUT}" }
+        val coreKtx by lazy { "androidx.core:core-ktx:${Versions.Jetpack.CORE}" }
+        val lifecycleLivedata by lazy { "androidx.lifecycle:lifecycle-livedata:${Versions.Jetpack.LIFECYCLE}" }
+        val lifecycleViewmodel by lazy { "androidx.lifecycle:lifecycle-viewmodel:${Versions.Jetpack.LIFECYCLE}" }
+        val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.Jetpack.NAVIGATION}" }
+        val navigationUiKtx by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.Jetpack.NAVIGATION}" }
+        val preferenceKtx by lazy { "androidx.preference:preference-ktx:${Versions.Jetpack.PREFERENCES}" }
+        val recyclerview by lazy { "androidx.recyclerview:recyclerview:${Versions.Jetpack.RECYCLERVIEW}" }
+        val roomKtx by lazy { "androidx.room:room-ktx:${Versions.Jetpack.ROOM}" }
+        val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.Jetpack.ROOM}" }
+        val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.Jetpack.ROOM}" }
+    }
+
+    object Google {
+        val hilt by lazy { "com.google.dagger:hilt-android:${Versions.Google.HILT}" }
+        val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.Google.HILT}" }
+        val material by lazy { "com.google.android.material:material:${Versions.Google.MATERIAL}" }
     }
 }
 

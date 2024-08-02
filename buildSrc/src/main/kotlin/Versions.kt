@@ -1,13 +1,20 @@
 object Versions {
-    const val buildTools = "8.5.1"
-    const val kotlin = "1.9.24"
+    const val BUILD_TOOLS = "8.5.1"
+    const val KOTLIN = "1.9.24"
 
     object Jetpack {
-        const val hilt = "2.51.1"
-        const val lifecycle = "2.8.4"
-        const val navigation = "2.5.3"
-        const val recyclerview = "1.2.1"
-        const val room = "2.6.1"
-        const val preferences = "1.2.0"
+        const val APP_COMPAT = "1.7.0"
+        const val CONSTRAINED_LAYOUT = "2.1.4"
+        const val CORE = "1.13.1"
+        const val LIFECYCLE = "2.8.4"
+        const val NAVIGATION = "2.7.7"
+        const val PREFERENCES = "1.2.1"
+        const val RECYCLERVIEW = "1.3.2"
+        const val ROOM = "2.6.1"
+    }
+
+    object Google {
+        const val HILT = "2.51.1"
+        const val MATERIAL = "1.12.0"
     }
 }
