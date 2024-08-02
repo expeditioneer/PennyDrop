@@ -7,13 +7,13 @@ object BuildPlugins {
 
 object Libraries {
     object JetPack {
-        val appcompat by lazy { "androidx.appcompat:appcompat:1.5.1" }
+        val appcompat by lazy { "androidx.appcompat:appcompat:1.7.0" }
         val constrainedLayout by lazy { "androidx.constraintlayout:constraintlayout:2.1.4" }
-        val coreKtx by lazy { "androidx.core:core-ktx:1.8.0" }
+        val coreKtx by lazy { "androidx.core:core-ktx:1.13.1" }
         val hilt by lazy { "com.google.dagger:hilt-android:${Versions.Jetpack.hilt}" }
         val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.Jetpack.hilt}" }
-        val lifecycleLivedata by lazy { "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Jetpack.lifecycle}" }
-        val lifecycleViewmodel by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Jetpack.lifecycle}" }
+        val lifecycleLivedata by lazy { "androidx.lifecycle:lifecycle-livedata:${Versions.Jetpack.lifecycle}" }
+        val lifecycleViewmodel by lazy { "androidx.lifecycle:lifecycle-viewmodel:${Versions.Jetpack.lifecycle}" }
         val material by lazy { "com.google.android.material:material:1.7.0" }
         val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.Jetpack.navigation}" }
         val navigationUiKtx by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.Jetpack.navigation}" }

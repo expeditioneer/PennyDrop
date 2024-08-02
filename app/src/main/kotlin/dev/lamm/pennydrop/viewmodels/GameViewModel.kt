@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.lamm.pennydrop.data.Game
 import dev.lamm.pennydrop.data.GameState
 import dev.lamm.pennydrop.data.GameStatus
 import dev.lamm.pennydrop.data.GameWithPlayers
@@ -31,8 +32,8 @@ class GameViewModel @Inject constructor(
     private var clearText = false
 
     val currentGame = MediatorLiveData<GameWithPlayers>()
-    val currentPlayer: LiveData<Player>
-    val currentStandingsText: LiveData<String>
+    val currentPlayer: LiveData<Player?>
+    val currentStandingsText: LiveData<String?>
 
     val slots: LiveData<List<Slot>>
 
@@ -50,25 +51,25 @@ class GameViewModel @Inject constructor(
             updateCurrentGame(this.currentGame.value, gameStatuses)
         }
 
-        this.currentPlayer = Transformations.map(this.currentGame) { gameWithPlayers ->
+        this.currentPlayer = this.currentGame.map { gameWithPlayers ->
             gameWithPlayers?.players?.firstOrNull { it.isRolling }
         }
 
-        this.currentStandingsText = Transformations.map(this.currentGame) { gameWithPlayers ->
+        this.currentStandingsText = this.currentGame.map { gameWithPlayers ->
             gameWithPlayers?.players?.let { players ->
                 this.generateCurrentStandings(players)
             }
         }
 
-        this.slots = Transformations.map(this.currentGame) { gameWithPlayers ->
+        this.slots = this.currentGame.map { gameWithPlayers ->
             Slot.mapFromGame(gameWithPlayers?.game)
         }
 
-        this.canRoll = Transformations.map(this.currentPlayer) { player ->
+        this.canRoll = this.currentPlayer.map { player ->
             player?.isHuman == true && currentGame.value?.game?.canRoll == true
         }
 
-        this.canPass = Transformations.map(this.currentPlayer) { player ->
+        this.canPass = this.currentPlayer.map { player ->
             player?.isHuman == true && currentGame.value?.game?.canPass == true
         }
     }
@@ -175,6 +176,7 @@ class GameViewModel @Inject constructor(
                         pennies = status.pennies + (result.coinChangeCount ?: 0)
                     )
                 }
+
                 result.currentPlayer?.playerId -> {
                     status.copy(
                         isRolling = !result.isGameOver,
@@ -184,6 +186,7 @@ class GameViewModel @Inject constructor(
                                 } else 0
                     )
                 }
+
                 else -> status
             }
         } ?: emptyList()

@@ -1,13 +1,13 @@
 object Versions {
-    const val buildTools = "7.3.0"
-    const val kotlin = "1.7.21"
+    const val buildTools = "8.5.1"
+    const val kotlin = "1.9.24"
 
     object Jetpack {
-        const val hilt = "2.44.2"
+        const val hilt = "2.51.1"
+        const val lifecycle = "2.8.4"
         const val navigation = "2.5.3"
-        const val lifecycle = "2.5.1"
         const val recyclerview = "1.2.1"
-        const val room = "2.4.3"
+        const val room = "2.6.1"
         const val preferences = "1.2.0"
     }
 }

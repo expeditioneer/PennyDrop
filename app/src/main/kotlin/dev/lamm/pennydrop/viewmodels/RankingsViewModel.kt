@@ -3,7 +3,7 @@ package dev.lamm.pennydrop.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.lamm.pennydrop.data.PennyDropRepository
 import dev.lamm.pennydrop.types.PlayerSummary
@@ -15,9 +15,8 @@ class RankingsViewModel @Inject constructor(
     private val repository: PennyDropRepository
 ) : AndroidViewModel(application) {
 
-    val playerSummaries: LiveData<List<PlayerSummary>> = Transformations.map(
-        this.repository.getCompletedGameStatusesWithPlayers()
-    ) { statusesWithPlayers ->
+    val playerSummaries: LiveData<List<PlayerSummary>> =
+        this.repository.getCompletedGameStatusesWithPlayers().map { statusesWithPlayers ->
         statusesWithPlayers
             .groupBy { it.player }
             .map { (player, statuses) ->

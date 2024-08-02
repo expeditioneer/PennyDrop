@@ -1,8 +1,8 @@
 plugins {
-    kotlin("kapt")
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.hilt)
+    kotlin("kapt")
 }
 
 android {
@@ -33,13 +33,12 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    kotlin {
+        jvmToolchain(17)
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
+    hilt {
+        enableAggregatingTask = true
     }
 }
 
